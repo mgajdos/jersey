@@ -506,6 +506,14 @@
                     </row>
                     <row>
                         <entry>
+                            <link xlink:href="https://jersey.java.net/project-info/&version;/jersey/project/jersey-mvc-velocity/dependencies.html">
+                                jersey-mvc-velocity
+                            </link>
+                        </entry>
+                        <entry>Jersey extension module providing support for Velocity templates.</entry>
+                    </row>
+                    <row>
+                        <entry>
                             <link xlink:href="https://jersey.java.net/project-info/&version;/jersey/project/jersey-proxy-client/dependencies.html">
                                 jersey-proxy-client
                             </link>
@@ -1047,6 +1055,14 @@
                             </link>
                         </entry>
                         <entry>Jersey SSE-based item store example.</entry>
+                    </row>
+                    <row>
+                        <entry>
+                            <link xlink:href="https://jersey.java.net/project-info/&version;/jersey/project/webapp-example-parent/velocity-webapp/dependencies.html">
+                                velocity-webapp
+                            </link>
+                        </entry>
+                        <entry>Jersey MVC Velocity example.</entry>
                     </row>
                 </tbody>
             </tgroup>

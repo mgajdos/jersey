@@ -1288,6 +1288,8 @@
         <jersey.version>${project.version}</jersey.version>
         <bnd.plugin.version>2.3.6</bnd.plugin.version>
         <cdi.api.version>1.1</cdi.api.version>
+        <commons-collections.version>3.2.1</commons-collections.version>
+        <commons-lang.version>2.4</commons-lang.version>
         <ejb.version>3.2</ejb.version>
         <fasterxml.classmate.version>0.8.0</fasterxml.classmate.version>
         <findbugs.glassfish.version>1.3</findbugs.glassfish.version>
@@ -1330,6 +1332,8 @@
         <spring3.version>3.2.3.RELEASE</spring3.version>
         <httpclient.version>4.2.5</httpclient.version>
         <validation.api.version>1.1.0.Final</validation.api.version>
+        <velocity.engine.version>1.7</velocity.engine.version>
+        <velocity.tools.version>2.0</velocity.tools.version>
         <weld.version>2.0.0.Final</weld.version>
         <gae.version>1.8.0</gae.version>
         <pax-web-version>0.7.4</pax-web-version><!-- TODO: UPGRADE! -->

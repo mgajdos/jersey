@@ -1,0 +1,7 @@
+<head>
+    #if(${title})
+    <title>${title}</title>
+    #else
+    <title>MVC Example</title>
+    #end
+</head>

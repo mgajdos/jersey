@@ -85,6 +85,15 @@
 <!ENTITY bv.project.link "<link xlink:href='http://beanvalidation.org/'>Bean Validation</link>">
 <!ENTITY bv11.javadoc.path "http://docs.jboss.org/hibernate/beanvalidation/spec/1.1/api">
 
+<!ENTITY jackson.javadoc.version "$jackson-version">
+
+<!ENTITY velocity.engine.version "$velocity-engine-version">
+<!ENTITY velocity.tools.version "$velocity-tools-version">
+<!ENTITY velocity.engine.docs.path "http://velocity.apache.org/engine/releases/velocity-&velocity.engine.version;">
+<!ENTITY velocity.tools.docs.path "http://velocity.apache.org/tools/releases/&velocity.tools.version;">
+<!ENTITY velocity.engine.javadoc.path "&velocity.engine.docs.path;/apidocs">
+<!ENTITY velocity.tools.javadoc.path "&velocity.tools.docs.path;/javadoc">
+
 <!ENTITY wikipedia.path "http://en.wikipedia.org/wiki">
 
 
@@ -385,6 +394,7 @@
 <!ENTITY jersey.server.mvc.MvcFeature "<link xlink:href='&jersey.javadoc.path;/server/mvc/MvcFeature.html'>MvcFeature</link>">
 <!ENTITY jersey.server.mvc.FreemarkerMvcFeature "<link xlink:href='&jersey.javadoc.path;/server/mvc/FreemarkerMvcFeature.html'>FreemarkerMvcFeature</link>">
 <!ENTITY jersey.server.mvc.JspMvcFeature "<link xlink:href='&jersey.javadoc.path;/server/mvc/JspMvcFeature.html'>JspMvcFeature</link>">
+<!ENTITY jersey.server.mvc.VelocityMvcFeature "<link xlink:href='&jersey.javadoc.path;/server/mvc/VelocityMvcFeature.html'>VelocityMvcFeature</link>">
 <!ENTITY jersey.server.mvc.Template "<link xlink:href='&jersey.javadoc.path;/server/mvc/Template.html'>@Template</link>">
 <!ENTITY jersey.server.mvc.TemplateProcessor "<link xlink:href='&jersey.javadoc.path;/server/mvc/TemplateProcessor.html'>TemplateProcessor</link>">
 <!ENTITY jersey.server.mvc.Viewable "<link xlink:href='&jersey.javadoc.path;/server/mvc/Viewable.html'>Viewable</link>">
@@ -448,6 +458,7 @@
 <!ENTITY jersey-mvc "<link xlink:href='&jersey.site.path;/jersey-mvc/dependencies.html'>jersey-mvc</link>" >
 <!ENTITY jersey-mvc-freemarker "<link xlink:href='&jersey.site.path;/jersey-mvc-freemarker/dependencies.html'>jersey-mvc-freemarker</link>" >
 <!ENTITY jersey-mvc-jsp "<link xlink:href='&jersey.site.path;/jersey-mvc-jsp/dependencies.html'>jersey-mvc-jsp</link>" >
+<!ENTITY jersey-mvc-velocity "<link xlink:href='&jersey.site.path;/jersey-mvc-velocity/dependencies.html'>jersey-mvc-velocity</link>" >
 <!ENTITY jersey-spring3 "<link xlink:href='&jersey.site.path;/jersey-spring3/dependencies.html'>jersey-spring3</link>" >
 
 <!-- Jersey GitHub links -->
@@ -509,6 +520,11 @@
 <!ENTITY wiki.Multipart "<link xlink:href='&wikipedia.path;/MIME#Multipart_messages'>MIME multipart message</link>">
 <!ENTITY wiki.MultipartMixed "<link xlink:href='&wikipedia.path;/MIME#Mixed'>multipart/mixed</link>">
 <!ENTITY wiki.JavaMemoryModel "<link xlink:href='&wikipedia.path;/Java_Memory_Model'>Java Memory Model</link>">
+
+<!-- Velocity links -->
+<!ENTITY velocity.engine "<link xlink:href='&velocity.engine.docs.path;'>Velocity Engine</link>">
+<!ENTITY velocity.tools "<link xlink:href='&velocity.tools.docs.path;'>Velocity Tools</link>">
+<!ENTITY velocity.tools.VelocityView "<link xlink:href='&velocity.tools.docs.path;/view.html'>VelocityView</link>">
 
 <!-- API Literals -->
 <!ENTITY lit.jaxrs.ApplicationPath "<literal>@ApplicationPath</literal>">
@@ -693,6 +709,7 @@
 
 <!ENTITY lit.jersey.server.mvc.FreemarkerMvcFeature "<literal>FreemarkerMvcFeature</literal>">
 <!ENTITY lit.jersey.server.mvc.JspMvcFeature "<literal>JspMvcFeature</literal>">
+<!ENTITY lit.jersey.server.mvc.VelocityMvcFeature "<literal>VelocityMvcFeature</literal>">
 <!ENTITY lit.jersey.server.mvc.MvcFeature "<literal>MvcFeature</literal>">
 <!ENTITY lit.jersey.server.mvc.Template "<literal>@Template</literal>">
 <!ENTITY lit.jersey.server.mvc.TemplateProcessor "<literal>TemplateProcessor</literal>">

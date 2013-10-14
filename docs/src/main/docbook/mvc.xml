@@ -63,7 +63,7 @@
         <title>Dependencies</title>
 
         <para>
-            Jersey MVC templating support is provided by Jersey as a set of (three) extension modules:
+            Jersey MVC templating support is provided by Jersey as a set of extension modules:
 
             <itemizedlist>
                 <listitem>
@@ -90,6 +90,14 @@
                         related engine-specific configuration properties.
                     </para>
                 </listitem>
+                <listitem>
+                    <para>&jersey-mvc-velocity;</para>
+                    <para>
+                        An integration module for Velocity-based templating engine. The module provides a custom
+                        &lit.jersey.server.mvc.TemplateProcessor; for Velocity templates and a set of
+                        related engine-specific configuration properties.
+                    </para>
+                </listitem>
             </itemizedlist>
         </para>
 
@@ -103,7 +111,7 @@
 
         <para>
             If you want to use just templating API infrastructure provided by Jersey for the MVC templating support in order to
-            implement your custom support for a templating engine other than the ones provided by Jersey (JSP/Freemarker),
+            implement your custom support for a templating engine other than the ones provided by Jersey (JSP/Freemarker/Velocity),
             you will need to add the base &jersey-mvc; module into the list of your dependencies:
 
             <programlisting language="xml">&lt;dependency&gt;
@@ -114,8 +122,8 @@
         </para>
 
         <para>
-            To use one of the templating engines for which Jersey provides the integration implementation (JSP/Freemarker)
-            in your project, you need to add the &jersey-mvc-jsp; or &jersey-mvc-freemarker; module to your &lit.pom.xml;
+            To use one of the templating engines for which Jersey provides the integration implementation (JSP/Freemarker/Velocity)
+            in your project, you need to add the &jersey-mvc-jsp; or &jersey-mvc-freemarker; or &jersey-mvc-velocity; module to your &lit.pom.xml;
             respectively:
 
             <programlisting language="xml">&lt;dependency&gt;
@@ -130,14 +138,20 @@
     &lt;version&gt;&version;&lt;/version&gt;
 &lt;/dependency&gt;</programlisting>
 
-            Both of these modules transitively depend on the base <literal>jersey-mvc</literal>, so it is not necessary to add
+            <programlisting language="xml">&lt;dependency&gt;
+    &lt;groupId&gt;org.glassfish.jersey.ext&lt;/groupId&gt;
+    &lt;artifactId&gt;jersey-mvc-velocity&lt;/artifactId&gt;
+     &lt;version&gt;&version;&lt;/version&gt;
+&lt;/dependency&gt;</programlisting>
+
+            All of these modules transitively depend on the base <literal>jersey-mvc</literal>, so it is not necessary to add
             the base <literal>jersey-mvc</literal> module explicitly into your dependency list, however it is a recommended
             Maven practice to do so.
         </para>
 
         <para>
             If you are not using Maven you need to make sure to have all required transitive dependencies
-            (see &jersey-mvc;/&jersey-mvc-freemarker;/&jersey-mvc-jsp;) on the classpath.
+            (see &jersey-mvc;/&jersey-mvc-freemarker;/&jersey-mvc-jsp;/&jersey-mvc-velocity;) on the classpath.
         </para>
     </section>
 
@@ -147,14 +161,16 @@
         <para>
             To use capabilities of Jersey MVC templating support in your JAX-RS/Jersey application you need to register
             &jaxrs.core.Feature;s provided by the modules mentioned above. For <literal>jersey-mvc</literal> it is
-            &jersey.server.mvc.MvcFeature;, for <literal>jersey-mvc-jsp</literal> it's &jersey.server.mvc.JspMvcFeature; and
-            for <literal>jersey-mvc-freemarker</literal> it is &jersey.server.mvc.FreemarkerMvcFeature;.
+            &jersey.server.mvc.MvcFeature;, for <literal>jersey-mvc-jsp</literal> it's &jersey.server.mvc.JspMvcFeature;, for
+            <literal>jersey-mvc-freemarker</literal> it is &jersey.server.mvc.FreemarkerMvcFeature; and for
+            <literal>jersey-mvc-velocity</literal> it is &jersey.server.mvc.VelocityMvcFeature;.
 
             <note>
                 <para>
-                    Both &lit.jersey.server.mvc.JspMvcFeature; and &lit.jersey.server.mvc.FreemarkerMvcFeature; also register
+                    &lit.jersey.server.mvc.JspMvcFeature; and &lit.jersey.server.mvc.FreemarkerMvcFeature; and
+                    &jersey.server.mvc.VelocityMvcFeature; also register
                     &lit.jersey.server.mvc.MvcFeature; so you don't need to register it explicitly when using these
-                    JSP/Freemarker modules.
+                    JSP/Freemarker/Velocity modules.
                 </para>
             </note>
 
@@ -170,6 +186,14 @@
                 <title>Registering &lit.jersey.server.mvc.JspMvcFeature;</title>
                 <programlisting language="java">new ResourceConfig()
     .register(org.glassfish.jersey.server.mvc.jsp.JspMvcFeature.class)
+    // Further configuration of ResourceConfig.
+    .register( ... );</programlisting>
+            </example>
+
+            <example>
+                <title>Registering &lit.jersey.server.mvc.VelocityMvcFeature;</title>
+                <programlisting language="java">new ResourceConfig()
+    .register(org.glassfish.jersey.server.mvc.velocity.VelocityMvcFeature.class)
     // Further configuration of ResourceConfig.
     .register( ... );</programlisting>
             </example>
@@ -190,7 +214,7 @@
             set in a JAX-RS &lit.jaxrs.core.Application; / &lit.jersey.server.ResourceConfig; in order to take effect,
             see the <xref linkend="mvc.ex.rc.properties" /> and <xref linkend="mvc.ex.web.xml.properties" />.
         </para>
-        <para>
+        <para xml:id="mvc.properties">
             Following list contains description of the available properties:
 
             <itemizedlist>
@@ -205,6 +229,14 @@
                 <listitem>
                     <para><literal>JspMvcProperties.TEMPLATE_BASE_PATH</literal> - "<literal>jersey.config.server.mvc.templateBasepath.jsp</literal>"</para>
                     <para>The base path where JSP templates are located.</para>
+                </listitem>
+                <listitem>
+                    <para><literal>VelocityMvcProperties.TEMPLATE_BASE_PATH</literal> - "<literal>jersey.config.server.mvc.templatePaths.velocity</literal>"</para>
+                    <para>A comma separated list of paths where Velocity templates are located, e.g.<literal>"/WEB-INF/templates, /WEB-INF/templates/common"</literal>.</para>
+                </listitem>
+                <listitem>
+                    <para><literal>VelocityMvcProperties.MODEL_ATTRIBUTE_NAME</literal> - "<literal>jersey.config.server.mvc.velocity.modelAttributeName</literal>"</para>
+                    <para>The name of the attribute where the model is exposed in the view. Default: "it".</para>
                 </listitem>
             </itemizedlist>
 
@@ -448,11 +480,88 @@ public Viewable get() {
         </para>
         <para>
             Jersey will assign the model instance to the attribute named "<literal>it</literal>". So in the case of the implicit
-            example it is possible to referece the <literal>foo</literal> property on the <literal>Foo</literal> resource
+            example it is possible to reference the <literal>foo</literal> property on the <literal>Foo</literal> resource
             from the JSP template as follows:
 
             <programlisting language="xml"><![CDATA[<h1>${it.foo}</h1>]]></programlisting>
         </para>
+    </section>
+
+    <section xml:id="mvc.velocity">
+        <title>Velocity</title>
+        <para>
+            &velocity.tools.VelocityView; is used in this MVC integration to bring together the &velocity.engine; and a
+            default set of &velocity.tools;. Native configuration of Velocity is extremely flexible, and more advanced
+            usage will likely require direct configuration of the components.
+        </para>
+        <para>
+            Both the Engine and Tools natively support configuration by i) properties file, ii) properties XML,
+            and iii) programmatically. The Engine properties can be found
+            <link xlink:href="&velocity.engine.docs.path;/developer-guide.html#Velocity_Configuration_Keys_and_Values">here</link>,
+            and the Tools properties are <link xlink:href="&velocity.tools.docs.path;/config.html">here</link>,
+            with examples of a <link xlink:href="&velocity.tools.docs.path;/config.properties.html">properties file here</link>,
+            and equivalent <link xlink:href="&velocity.tools.docs.path;/config.xml.html">XML here</link>.
+        </para>
+        <para>Aside from the MVC properties (<xref linkend="mvc.properties">above</xref>), users may utilise any or all of the following configuration
+            methods:
+
+            <itemizedlist>
+                <listitem>
+                    <para>Configure ExtendedProperties in &jersey.server.ResourceConfig;(preferred)</para>
+                    <para>
+                        Users can setup an instance of <literal>ExtendedProperties</literal> in a subclass of &lit.jersey.server.ResourceConfig;.
+                        The properties may include include both Engine and Tools configuration.
+                        See <xref linkend="mvc.ex.velocity.extendedproperties"/>
+                    </para>
+                </listitem>
+                <listitem>
+                    <para>Configuration files in (Velocity) standard locations</para>
+                    <para>
+                        Velocity expects: i) the Engine configuration to be located in a <literal>/WEB-INF/velocity.properties</literal> file,
+                        and ii) the Tools configuration to be located in a <literal>/WEB-INF/tools.xml</literal> file.
+                        Users may simply deploy these files as required.</para>
+                </listitem>
+                <listitem>
+                    <para>Configuration files in user-specified locations</para>
+                    <para>
+                        The <literal>org.apache.velocity.properties</literal> init-param can be used to set the user provided location of
+                        the Velocity Engine properties. Similarly, the <literal>org.apache.velocity.toolbox</literal> init-param can provide a
+                        location for the Tools configuration.
+                        See <link xlink:href="&velocity.tools.docs.path;/frameworks.html#Integration_Via_VelocityView">Integration Via VelocityView</link>
+                        for further details.
+                    </para>
+                </listitem>
+            </itemizedlist>
+        </para>
+        <example xml:id="mvc.ex.velocity.extendedproperties">
+            <title>Configuring Velocity using ExtendedProperties</title>
+            <programlisting language="java">
+                ...
+                import static org.glassfish.jersey.server.mvc.velocity.VelocityProperties.*;
+
+                public class MyApplication extends ResourceConfig {
+                    public MyApplication() {
+                    ...
+
+                    // Advanced Velocity configuration
+                    ExtendedProperties ve = new ExtendedProperties();
+
+                    // Velocity Engine properties
+                    ve.addProperty("webapp.resource.loader.path", "/WEB-INF/templates/");
+                    ve.addProperty("webapp.resource.loader.path", "/WEB-INF/templates/common/"); // Note: the multiple calls to set the webapp.resource.loader.path property
+
+                    // Velocity Tools properties
+                    ve.addProperty("tools.toolbox", "request");
+                    ve.addProperty("tools.request.example", "org.glassfish.jersey.examples.velocity.tools.ExampleTool");
+
+                    // Store the properties at a known location, for Velocity initialisation
+                    property(USER_PROPERTIES, ve);
+
+                    ...
+                    }
+                }
+            </programlisting>
+        </example>
     </section>
 
     <section xml:id="mvc.spi">
