@@ -46,12 +46,12 @@
     <parent>
         <groupId>org.glassfish.jersey.ext</groupId>
         <artifactId>project</artifactId>
-        <version>2.4-SNAPSHOT</version>
+        <version>2.5-SNAPSHOT</version>
     </parent>
     <modelVersion>4.0.0</modelVersion>
 
     <artifactId>jersey-mvc-velocity</artifactId>
-    <name>jersey-mvc-velocity</name>
+    <name>jersey-ext-mvc-velocity</name>
 
     <description>
         Jersey extension module providing support for Velocity templates.

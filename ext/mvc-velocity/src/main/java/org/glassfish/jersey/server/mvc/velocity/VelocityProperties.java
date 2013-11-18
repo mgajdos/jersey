@@ -46,57 +46,56 @@ import org.glassfish.jersey.server.mvc.MvcProperties;
  * Jersey MVC Velocity configuration properties.
  *
  * @author Paul K Moore (paulkmoore @ gmail.com)
- * @since 2.3.2
+ * @since 2.5
  */
 public final class VelocityProperties {
-  /**
-   * Namespace for all the MVC feature properties.
-   */
-  private final static String MVC_PROPERTIES = "jersey.config.server.mvc";
 
-  /**
-   * Namespace for the MVC properties specific to the Velocity implementation.
-   */
-  private final static String VELOCITY_PROPERTIES = MVC_PROPERTIES + ".velocity";
+    /**
+     * Namespace for all the MVC feature properties.
+     */
+    private final static String MVC_PROPERTIES = "jersey.config.server.mvc";
 
-  /**
-   * This variable at which the model will be exposed in the Velocity template.
-   * <p/>
-   * For consistency with the jersey-mvc-jsp feature we set the default model attribute name to "it",
-   * see {@link org.glassfish.jersey.server.mvc.velocity.internal.VelocityTemplateProcessor}, but
-   * users are free to configure any name via this property.
-   */
-  public final static String MODEL_ATTRIBUTE_NAME = VELOCITY_PROPERTIES + ".modelAttributeName";
+    /**
+     * Namespace for the MVC properties specific to the Velocity implementation.
+     */
+    private final static String VELOCITY_PROPERTIES = MVC_PROPERTIES + ".velocity";
 
-  /**
-   * The base path in the Webapp where the Velocity templates are located.
-   * <p/>
-   * The path is used to configure the Velocity "webapp.resource.loader.path" property.
-   * If this property is not set, the base path will be the root path of the Webapp.
-   * <p/>
-   * Note: Users may specify a comma separated list of paths e.g. "/WEB-INF/templates/, /WEB-INF/templates/common/"
-   */
-  public static final String TEMPLATES_BASE_PATH = MvcProperties.TEMPLATE_BASE_PATH + ".velocity";  // Retain the Mvc structure
+    /**
+     * This variable at which the model will be exposed in the Velocity template.
+     * <p/>
+     * For consistency with the jersey-mvc-jsp feature we set the default model attribute name to "it",
+     * see {@link VelocityTemplateProcessor}, but
+     * users are free to configure any name via this property.
+     */
+    public final static String MODEL_ATTRIBUTE_NAME = VELOCITY_PROPERTIES + ".modelAttributeName";
 
-  /**
-   * This is the {@link org.apache.commons.collections.ExtendedProperties} for the configuration of VelocityView.
-   * <p/>
-   * The Velocity Engine, together with the Velocity Tools are <i>very</i> configurable. Users may create
-   * an {@link org.apache.commons.collections.ExtendedProperties} object and store it in the {@link org.glassfish.jersey.server.ResourceConfig}
-   * under this property. The {@link org.glassfish.jersey.server.mvc.velocity.internal.VelocityTemplateProcessor}
-   * queries this property looking for the user configuration.
-   * <p/>
-   * Note: the user configuration takes precedence.  For explicitness, a user specified property
-   * trumps any existing configuration of that property, but an unspecified property will not
-   * delete an existing property.
-   */
-  public final static String USER_PROPERTIES = VELOCITY_PROPERTIES + ".userProperties";
+    /**
+     * The base path in the Webapp where the Velocity templates are located.
+     * <p/>
+     * The path is used to configure the Velocity "webapp.resource.loader.path" property.
+     * If this property is not set, the base path will be the root path of the Webapp.
+     * <p/>
+     * Note: Users may specify a comma separated list of paths e.g. "/WEB-INF/templates/, /WEB-INF/templates/common/"
+     */
+    public static final String TEMPLATES_BASE_PATH = MvcProperties.TEMPLATE_BASE_PATH + ".velocity";  // Retain the Mvc structure
 
+    /**
+     * This is the {@link org.apache.commons.collections.ExtendedProperties} for the configuration of VelocityView.
+     * <p/>
+     * The Velocity Engine, together with the Velocity Tools are <i>very</i> configurable. Users may create
+     * an {@link org.apache.commons.collections.ExtendedProperties} object and store it in the
+     * {@link org.glassfish.jersey.server.ResourceConfig} under this property. The {@link VelocityTemplateProcessor}
+     * queries this property looking for the user configuration.
+     * <p/>
+     * Note: the user configuration takes precedence.  For explicitness, a user specified property
+     * trumps any existing configuration of that property, but an unspecified property will not
+     * delete an existing property.
+     */
+    public final static String USER_PROPERTIES = VELOCITY_PROPERTIES + ".userProperties";
 
-
-  /**
-   * Prevent initialization.
-   */
-  private VelocityProperties() {
-  }
+    /**
+     * Prevent initialization.
+     */
+    private VelocityProperties() {
+    }
 }

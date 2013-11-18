@@ -65,7 +65,7 @@
 
     <context-param>
         <param-name>org.apache.velocity.tools.view.class</param-name>
-        <param-value>org.glassfish.jersey.server.mvc.velocity.internal.JerseyVelocityView</param-value>
+        <param-value>org.glassfish.jersey.server.mvc.velocity.JerseyVelocityView</param-value>
     </context-param>
     <context-param>
         <param-name>org.apache.velocity.tools.deprecationSupportMode</param-name>

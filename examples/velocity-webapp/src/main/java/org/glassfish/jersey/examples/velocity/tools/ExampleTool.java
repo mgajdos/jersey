@@ -46,29 +46,31 @@ import org.apache.velocity.tools.config.InvalidScope;
 import org.apache.velocity.tools.generic.SafeConfig;
 
 /**
- * ExampleTool is a simple example of a <a href="http://velocity.apache.org/tools/releases/2.0/creatingtools.html"custom VelocityTool</a>.
- * <p/>
+ * ExampleTool is a simple example of a <a href="http://velocity.apache.org/tools/releases/2.0/creatingtools.html">custom
+ * VelocityTool</a>.
+ *
  * @author Paul K Moore (paulkmoore at gmail.com)
- * @since 2.3.2
+ * @since 2.5
  */
 @DefaultKey("example")
-@InvalidScope({Scope.APPLICATION,Scope.SESSION})
+@InvalidScope({Scope.APPLICATION, Scope.SESSION})
 public class ExampleTool extends SafeConfig {
-  public ExampleTool() {
-    // Required no-arg constructor
-  }
 
-  /**
-   * Get a greeting.
-   *
-   * @param name the name of the person being greeted
-   * @return the greeting
-   */
-  public String greeting(String name) {
-    if(name == null) {
-      return null;
-    } else {
-      return "Hello " + name + "!";
+    public ExampleTool() {
+        // Required no-arg constructor
     }
-  }
+
+    /**
+     * Get a greeting.
+     *
+     * @param name the name of the person being greeted
+     * @return the greeting
+     */
+    public String greeting(String name) {
+        if (name == null) {
+            return null;
+        } else {
+            return "Hello " + name + "!";
+        }
+    }
 }

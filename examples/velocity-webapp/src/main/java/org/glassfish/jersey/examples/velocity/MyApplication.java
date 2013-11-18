@@ -40,40 +40,42 @@
 
 package org.glassfish.jersey.examples.velocity;
 
-import org.apache.commons.collections.ExtendedProperties;
 import org.glassfish.jersey.server.ResourceConfig;
 import org.glassfish.jersey.server.mvc.velocity.VelocityMvcFeature;
 
-import static org.glassfish.jersey.server.mvc.velocity.VelocityProperties.*;
+import org.apache.commons.collections.ExtendedProperties;
 import static org.apache.velocity.runtime.RuntimeConstants.RUNTIME_LOG_LOGSYSTEM_CLASS;
+import static org.glassfish.jersey.server.mvc.velocity.VelocityProperties.USER_PROPERTIES;
 
 /**
  * Velocity application configuration.
  *
  * @author Paul K Moore (paulkmoore at gmail.com)
- * @since 2.3.2
+ * @since 2.5
  */
 public class MyApplication extends ResourceConfig {
-  public MyApplication() {
-    // Enable Velocity MVC handling
-    register(VelocityMvcFeature.class);
 
-    // Basic configuration - uncomment to experiment with these
-//    property(MODEL_ATTRIBUTE_NAME, "model");
-//    property(TEMPLATES_BASE_PATH, "/WEB-INF/templates/, /WEB-INF/templates/common/");
+    public MyApplication() {
+        // Enable Velocity MVC handling
+        register(VelocityMvcFeature.class);
 
-    // Advanced configuration
-    ExtendedProperties ve = new ExtendedProperties();
-    // Velocity Engine properties
-    ve.addProperty("webapp.resource.loader.path", "/WEB-INF/templates/");
-    ve.addProperty("webapp.resource.loader.path", "/WEB-INF/templates/common/"); // Note: the multiple calls to set the webapp.resource.loader.path property - these are cumulative
-    // Velocity Tools properties
-    ve.addProperty("tools.toolbox", "request");
-    ve.addProperty("tools.request.example", "org.glassfish.jersey.examples.velocity.tools.ExampleTool");
-    ve.addProperty(RUNTIME_LOG_LOGSYSTEM_CLASS, ""); // Unconfigure our default Jersey logger
-    property(USER_PROPERTIES, ve); // Store the properties at a known location, for Velocity initialisation
+        // Basic configuration - uncomment to experiment with these
+        // property(MODEL_ATTRIBUTE_NAME, "model");
+        // property(TEMPLATES_BASE_PATH, "/WEB-INF/templates/, /WEB-INF/templates/common/");
 
-    // Register our resource(s) (Controllers)
-    packages("org.glassfish.jersey.examples.velocity.resources"); // packages will be scanned by Jersey
-  }
+        // Advanced configuration
+        ExtendedProperties ve = new ExtendedProperties();
+        // Velocity Engine properties
+        ve.addProperty("webapp.resource.loader.path", "/WEB-INF/templates/");
+        // Note: the multiple calls to set the webapp.resource.loader.path property - these are cumulative
+        ve.addProperty("webapp.resource.loader.path", "/WEB-INF/templates/common/");
+        // Velocity Tools properties
+        ve.addProperty("tools.toolbox", "request");
+        ve.addProperty("tools.request.example", "org.glassfish.jersey.examples.velocity.tools.ExampleTool");
+        ve.addProperty(RUNTIME_LOG_LOGSYSTEM_CLASS, ""); // Un-configure our default Jersey logger
+        property(USER_PROPERTIES, ve); // Store the properties at a known location, for Velocity initialisation
+
+        // Register our resource(s) (Controllers)
+        packages("org.glassfish.jersey.examples.velocity.resources"); // packages will be scanned by Jersey
+    }
 }

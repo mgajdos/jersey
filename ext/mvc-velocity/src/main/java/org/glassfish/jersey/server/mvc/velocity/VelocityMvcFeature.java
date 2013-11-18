@@ -40,36 +40,38 @@
 
 package org.glassfish.jersey.server.mvc.velocity;
 
-import org.glassfish.jersey.server.mvc.MvcFeature;
-import org.glassfish.jersey.server.mvc.velocity.internal.VelocityTemplateProcessor;
-
 import javax.ws.rs.ConstrainedTo;
 import javax.ws.rs.RuntimeType;
+import javax.ws.rs.core.Configuration;
 import javax.ws.rs.core.Feature;
 import javax.ws.rs.core.FeatureContext;
+
+import org.glassfish.jersey.server.mvc.MvcFeature;
 
 /**
  * {@code VelocityMvcFeature} used to add MVC ({@link MvcFeature}) and Velocity template support to the server.
  *
  * @author Paul K Moore (paulkmoore at gmail.com)
- * @since 2.3.2
+ * @since 2.5
  */
 @ConstrainedTo(RuntimeType.SERVER)
 public class VelocityMvcFeature implements Feature {
 
-  @Override
-  public boolean configure(FeatureContext context) {
-    try {
-      // Register the MVC feature, if not already registered
-      if (!context.getConfiguration().isRegistered(MvcFeature.class)) {
-        context.register(MvcFeature.class);
-      }
+    @Override
+    public boolean configure(FeatureContext context) {
+        final Configuration config = context.getConfiguration();
 
-      // Register our feature
-      context.register(VelocityTemplateProcessor.class);
-      return true;
-    } catch (Exception e) {
-      return false;
+        if (!config.isRegistered(VelocityTemplateProcessor.class)) {
+            // Template Processor.
+            context.register(VelocityTemplateProcessor.class);
+
+            // Register the MVC feature, if not already registered.
+            if (!config.isRegistered(MvcFeature.class)) {
+                context.register(MvcFeature.class);
+            }
+
+            return true;
+        }
+        return false;
     }
-  }
 }

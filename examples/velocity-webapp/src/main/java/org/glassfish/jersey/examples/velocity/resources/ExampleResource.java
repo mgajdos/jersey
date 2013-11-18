@@ -40,74 +40,78 @@
 
 package org.glassfish.jersey.examples.velocity.resources;
 
-import org.glassfish.jersey.server.mvc.Viewable;
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
 
 import javax.ws.rs.GET;
 import javax.ws.rs.Path;
-import javax.ws.rs.PathParam;
 import javax.ws.rs.Produces;
 import javax.ws.rs.core.Link;
 import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.UriBuilder;
-import java.util.*;
+
+import org.glassfish.jersey.server.mvc.Viewable;
 
 /**
  * ExampleResource is our Controller for this MVC example.
  * <p/>
+ *
  * @author Paul K Moore (paulkmoore at gmail.com)
- * @since 2.3.2
+ * @since 2.5
  */
 @Path("examples")
 public class ExampleResource {
 
-  @GET
-  @Produces(MediaType.TEXT_HTML)
-  public Viewable getIndex() {
-    List<Link> links = new ArrayList<Link>();
-    links.add(Link.fromUriBuilder(UriBuilder.fromResource(ExampleResource.class).path(ExampleResource.class, "getIncluded"))
-            .type(MediaType.TEXT_HTML)
-            .title("Introduction to #include and #parse")
-            .build());
-    links.add(Link.fromUriBuilder(UriBuilder.fromResource(ExampleResource.class).path(ExampleResource.class, "getModel"))
-            .type(MediaType.TEXT_HTML)
-            .title("Getting values from the model")
-            .build());
-    links.add(Link.fromUriBuilder(UriBuilder.fromResource(ExampleResource.class).path(ExampleResource.class, "getTool"))
-            .type(MediaType.TEXT_HTML)
-            .title("Usage of a custom tool (ExampleTool)")
-            .build());
-    return new Viewable("index", links);
-  }
+    @GET
+    @Produces(MediaType.TEXT_HTML)
+    public Viewable getIndex() {
+        List<Link> links = new ArrayList<Link>();
+        links.add(Link.fromUriBuilder(UriBuilder.fromResource(ExampleResource.class).path(ExampleResource.class, "getIncluded"))
+                .type(MediaType.TEXT_HTML)
+                .title("Introduction to #include and #parse")
+                .build());
+        links.add(Link.fromUriBuilder(UriBuilder.fromResource(ExampleResource.class).path(ExampleResource.class, "getModel"))
+                .type(MediaType.TEXT_HTML)
+                .title("Getting values from the model")
+                .build());
+        links.add(Link.fromUriBuilder(UriBuilder.fromResource(ExampleResource.class).path(ExampleResource.class, "getTool"))
+                .type(MediaType.TEXT_HTML)
+                .title("Usage of a custom tool (ExampleTool)")
+                .build());
+        return new Viewable("index", links);
+    }
 
-  @Path("include-and-parse")
-  @GET
-  @Produces(MediaType.TEXT_HTML)
-  public Viewable getIncluded() {
-    return new Viewable("include-and-parse");
-  }
+    @Path("include-and-parse")
+    @GET
+    @Produces(MediaType.TEXT_HTML)
+    public Viewable getIncluded() {
+        return new Viewable("include-and-parse");
+    }
 
-  @Path("model")
-  @GET
-  @Produces(MediaType.TEXT_HTML)
-  public Viewable getModel() {
-    Map<String, Object> data = new HashMap<String, Object>();
-    data.put("name", "Paul Moore");
-    data.put("email", "paulkmoore at gmail.com");
+    @Path("model")
+    @GET
+    @Produces(MediaType.TEXT_HTML)
+    public Viewable getModel() {
+        Map<String, Object> data = new HashMap<String, Object>();
+        data.put("name", "Paul Moore");
+        data.put("email", "paulkmoore at gmail.com");
 
-    List<String> list = new ArrayList<String>();
-    list.add("List item 1");
-    list.add("List item 2");
-    list.add("List item 3");
+        List<String> list = new ArrayList<String>();
+        list.add("List item 1");
+        list.add("List item 2");
+        list.add("List item 3");
 
-    data.put("list", list);
+        data.put("list", list);
 
-    return new Viewable("model", data);
-  }
+        return new Viewable("model", data);
+    }
 
-  @Path("custom-tool")
-  @GET
-  @Produces(MediaType.TEXT_HTML)
-  public Viewable getTool() {
-    return new Viewable("custom-tool");
-  }
+    @Path("custom-tool")
+    @GET
+    @Produces(MediaType.TEXT_HTML)
+    public Viewable getTool() {
+        return new Viewable("custom-tool");
+    }
 }

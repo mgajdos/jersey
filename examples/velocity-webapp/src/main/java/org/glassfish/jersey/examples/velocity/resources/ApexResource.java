@@ -40,25 +40,26 @@
 
 package org.glassfish.jersey.examples.velocity.resources;
 
-import org.glassfish.jersey.server.mvc.Viewable;
-
 import javax.ws.rs.GET;
 import javax.ws.rs.Path;
 import javax.ws.rs.Produces;
 import javax.ws.rs.core.MediaType;
 
+import org.glassfish.jersey.server.mvc.Viewable;
+
 /**
  * ApexResource serves the application root in our example.
  * <p/>
+ *
  * @author Paul K Moore (paulkmoore at gmail.com)
- * @since 2.3.2
+ * @since 2.5
  */
 @Path("/")
 public class ApexResource {
 
-  @GET
-  @Produces(MediaType.TEXT_HTML)
-  public Viewable getIndex() {
-    return new Viewable("index");
-  }
+    @GET
+    @Produces(MediaType.TEXT_HTML)
+    public Viewable getIndex() {
+        return new Viewable("index");
+    }
 }
